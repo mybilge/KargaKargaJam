@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-
-public class AIForEnemy : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
-    public Transform target;
-    public float speed;
-    public float nextWaypointDistance = 2f;
+    [SerializeField] Transform target;
+    [SerializeField] float speed;
+    [SerializeField] float nextWaypointDistance = 2f;
+    [SerializeField] float updatePathRepeatingTime = 0.1f;
+    [SerializeField] float damageRepeatingTime = 1f;
+
 
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
     Seeker seeker;
     Rigidbody2D rb;
+    float timer = 0f;
+    bool canHit = true;
      
 
     private void Start() {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        
 
-        InvokeRepeating("UpdatePath", 0, 0.5f);
+        InvokeRepeating("UpdatePath", 0, updatePathRepeatingTime);
     }
 
     void UpdatePath()
@@ -42,6 +45,15 @@ public class AIForEnemy : MonoBehaviour
     }
 
     private void FixedUpdate() {
+
+
+        timer += Time.fixedDeltaTime;
+        if(timer >= damageRepeatingTime)
+        {
+            canHit = true;
+        }
+
+
         
         if(path == null)
         {
@@ -78,14 +90,29 @@ public class AIForEnemy : MonoBehaviour
                 currentWaypoint++;
             }
         }
-
-        
-
     }
 
-    float timer = 0f;
+    
 
-    private void OnCollisionStay2D(Collision2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
+
+        if (!canHit)
+        {
+            return;
+        }
         
+        if(!other.transform.CompareTag("Player"))
+        {
+            return;
+        }
+
+        //hasar ver
+
+        if(other.transform.TryGetComponent<HealthSystem>(out HealthSystem hs))
+        {
+            hs.GetDamage();
+            canHit = false;
+            timer = 0;
+        }
     }
 }
