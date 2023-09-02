@@ -26,7 +26,7 @@ public class FirstPlayMenuManager : MonoBehaviour
     void GoNext()
     {
         PlayerPrefs.SetString("Username", usernameInputField.text);
-        LeaderboardManager.Instance.SetLeaderboardEntry(usernameInputField.text,0);
+        
         usernameInputField.ActivateInputField();
         gameObject.SetActive(false);
         normalMainMenu.SetActive(true);

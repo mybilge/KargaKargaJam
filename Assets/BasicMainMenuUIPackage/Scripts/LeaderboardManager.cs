@@ -25,12 +25,15 @@ public class LeaderboardManager : MonoBehaviour
         }
         Instance = this;
 
-
         for (int i = 0; i < names.Count; i++)
         {
             names[i].text = "";
             scores[i].text = "";
         }
+    }
+
+    private void Start() {
+        
     }
 
 
@@ -47,12 +50,13 @@ public class LeaderboardManager : MonoBehaviour
 
             for (int i = 0; i < loopLength; i++)
             {
+                Debug.Log(msg[i].Username  + " " +msg[i].Score);
                 if(msg[i].Score <= 0)
                 {
                     continue;
                 }
                 names[a].text = msg[i].Username;
-                scores[a].text = msg[i].Score.ToString();
+                scores[a].text = (msg[i].Score/100f).ToString();
                 a++;
             }
         }));

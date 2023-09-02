@@ -21,5 +21,6 @@ public class HealthSystem : MonoBehaviour
     void Die()
     {
         Debug.Log("öldün");
+        TimeManager.Instance.GameEndLose();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
@@ -8,6 +9,19 @@ public class TimeManager : MonoBehaviour
     
     float timer;
     bool isEnded = false;
+
+
+    public static TimeManager Instance;
+
+    private void Awake() {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else{
+            Destroy(this);
+        }
+    }
 
     private void Update() {
         if(!isEnded)
@@ -22,13 +36,29 @@ public class TimeManager : MonoBehaviour
         {
             isEnded = true;
 
-            GameEnd();
+            GameEndWin();
         }
     }    
 
-    void GameEnd()
+    void GameEndWin()
     {
-        Debug.Log(PlayerPrefs.GetString("Username") + (int)(timer*100));
-        LeaderboardManager.Instance.SetLeaderboardEntry(PlayerPrefs.GetString("Username"),((int)(timer*100)));
+        Time.timeScale = 0;
+
+        if(PlayerPrefs.GetInt("BestScore") > (int)(timer*100) || PlayerPrefs.GetInt("BestScore") ==0)
+        {
+            PlayerPrefs.SetInt("BestScore", (int)(timer*100));
+        }
+
+    }
+
+    public void GameEndLose()
+    {
+        Time.timeScale = 0;
+    }
+
+
+    void ReturnMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
