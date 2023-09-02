@@ -35,17 +35,25 @@ public class LeaderboardManager : MonoBehaviour
 
 
 
-    string leaderboardPublicKey = "1f85a2a070dc6ead6e49e6aebf5a951ac8a9157a5dcdc65813d3a4295e034fa4";
+    string leaderboardPublicKey = "4cc86302903c1f1b5927f44acb71d7df6bdc824e048821e0141b2237d4d45e1b";
     public void GetLeaderboard()
     {
         LeaderboardCreator.GetLeaderboard(leaderboardPublicKey,((msg)=>
         {
             int loopLength = (msg.Length<names.Count)?msg.Length:names.Count;
             //Debug.Log(msg.Length);
+
+            int a = 0;
+
             for (int i = 0; i < loopLength; i++)
             {
-                names[i].text = msg[i].Username;
-                scores[i].text = msg[i].Score.ToString();
+                if(msg[i].Score <= 0)
+                {
+                    continue;
+                }
+                names[a].text = msg[i].Username;
+                scores[a].text = msg[i].Score.ToString();
+                a++;
             }
         }));
     }

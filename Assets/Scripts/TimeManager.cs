@@ -28,6 +28,7 @@ public class TimeManager : MonoBehaviour
 
     void GameEnd()
     {
-
+        Debug.Log(PlayerPrefs.GetString("Username") + (int)(timer*100));
+        LeaderboardManager.Instance.SetLeaderboardEntry(PlayerPrefs.GetString("Username"),((int)(timer*100)));
     }
 }
