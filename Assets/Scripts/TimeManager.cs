@@ -42,23 +42,18 @@ public class TimeManager : MonoBehaviour
 
     void GameEndWin()
     {
-        Time.timeScale = 0;
 
         if(PlayerPrefs.GetInt("BestScore") > (int)(timer*100) || PlayerPrefs.GetInt("BestScore") ==0)
         {
             PlayerPrefs.SetInt("BestScore", (int)(timer*100));
         }
 
+        UIManager.Instance.ShowWinScreen();
     }
 
-    public void GameEndLose()
+    public float Timer()
     {
-        Time.timeScale = 0;
+        return timer;
     }
-
-
-    void ReturnMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
+    
 }

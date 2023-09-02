@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] int health = 10;
+    [SerializeField] int maxHealth = 10;
+    int health;
+
+    public static HealthSystem Instance;
+
+    private void Awake() {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else{
+            Destroy(this);
+        }
+
+        health = maxHealth;
+    }
 
     public void GetDamage()
     {
@@ -21,6 +36,13 @@ public class HealthSystem : MonoBehaviour
     void Die()
     {
         Debug.Log("öldün");
-        TimeManager.Instance.GameEndLose();
+
+        UIManager.Instance.ShowLoseScreen();
+    }
+
+
+    public float HealthPercentage()
+    {
+        return ((float)health)/ ((float)maxHealth);
     }
 }

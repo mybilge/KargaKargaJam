@@ -56,7 +56,14 @@ public class LeaderboardManager : MonoBehaviour
                     continue;
                 }
                 names[a].text = msg[i].Username;
-                scores[a].text = (msg[i].Score/100f).ToString();
+
+                TimeSpan t = TimeSpan.FromMilliseconds(msg[i].Score*10);
+                string str = string.Format("{0:D2}:{1:D2}:{2:D3}", 
+                t.Minutes, 
+                t.Seconds, 
+                t.Milliseconds);
+
+                scores[a].text = str;
                 a++;
             }
         }));

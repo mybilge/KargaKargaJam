@@ -33,7 +33,7 @@ public class WeaponController : MonoBehaviour
             Destroy(this);
         }
         
-
+        fuel = maxFuel;
     }
     private void Start() {
         mainCam = Camera.main;
@@ -100,4 +100,10 @@ public class WeaponController : MonoBehaviour
     {
         return pushBackForce;
     }
+
+    public float FuelPercentage()
+    {
+        return fuel/maxFuel;
+    }
+
 }
