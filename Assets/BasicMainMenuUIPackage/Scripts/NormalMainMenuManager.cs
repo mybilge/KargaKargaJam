@@ -31,7 +31,17 @@ public class NormalMainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level1");
+        if(PlayerPrefs.HasKey("Tutorial"))
+        {
+            SceneManager.LoadScene("Level1");
+
+        }
+        else{
+            
+            SceneManager.LoadScene("TutorialLevel");
+        }
+
+        
     }
 
     public void ExitGame()

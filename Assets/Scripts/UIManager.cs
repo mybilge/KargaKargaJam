@@ -122,6 +122,23 @@ public class UIManager : MonoBehaviour
         AudioManager.Instance.aSource.Stop();
         WeaponController.Instance.isGameStopped = true;
 
+
+        if(!PlayerPrefs.HasKey("Tutorial"))
+        {
+            
+            PlayerPrefs.SetInt("Tutorial",1);
+            Time.timeScale = 1;
+            Invoke("LoadLevelA",1f);
+            //return;
+        }
+
+    }
+
+
+     public void LoadLevelA()
+    {
+        Debug.Log("aa");
+        SceneManager.LoadScene("Level1");
     }
     public void ShowLoseScreen()
     {

@@ -42,15 +42,26 @@ public class TimeManager : MonoBehaviour
 
     void GameEndWin()
     {
+        UIManager.Instance.ShowWinScreen();
+
+        if(PlayerPrefs.GetInt("Tutorial") == 1 || !PlayerPrefs.HasKey("Tutorial"))
+        {
+            PlayerPrefs.SetInt("Tutorial",2);
+            return;
+        }
+        
 
         if(PlayerPrefs.GetInt("BestScore") > (int)(timer*100) || PlayerPrefs.GetInt("BestScore") ==0)
         {
             PlayerPrefs.SetInt("BestScore", (int)(timer*100));
         }
 
-        UIManager.Instance.ShowWinScreen();
+        
 
     }
+
+
+   
 
     public float Timer()
     {
