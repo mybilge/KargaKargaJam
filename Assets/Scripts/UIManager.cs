@@ -16,6 +16,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameWinTimerText;
     [SerializeField] GameObject gameLose;
 
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] Button pauseBtn;
+
+    bool isPaused = false;
+    bool isGameEnded = false;
+
 
     public static UIManager Instance;
 
@@ -42,16 +48,63 @@ public class UIManager : MonoBehaviour
 
         healthBar.fillAmount = HealthSystem.Instance.HealthPercentage();
         fuelBar.fillAmount = WeaponController.Instance.FuelPercentage();
+
+
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPaused)
+            {
+                Cont();
+            }
+            else{
+                Pause();
+            }
+
+            
+        }
+
+
     }
+
+    public void Pause()
+    {
+
+        if(isGameEnded)
+        {
+            return;
+        }
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        isPaused = true;
+        pauseBtn.gameObject.SetActive(false);
+    }
+
+    public void Cont()
+    {
+        
+        if(isGameEnded)
+        {
+            return;
+        }
+
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+        isPaused = false;
+        pauseBtn.gameObject.SetActive(true);
+    }
+
 
     public void ReturnMainMenu()
     {
+        isGameEnded = true;
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
 
     public void ShowWinScreen()
     {
+        isGameEnded = true;
         Time.timeScale = 0;
 
         gameWin.SetActive(true);
@@ -67,6 +120,7 @@ public class UIManager : MonoBehaviour
     }
     public void ShowLoseScreen()
     {
+        isGameEnded = true;
         Time.timeScale = 0;
         gameLose.SetActive(true);
 

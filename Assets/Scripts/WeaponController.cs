@@ -45,7 +45,7 @@ public class WeaponController : MonoBehaviour
 
         Vector2 dir = mainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        gunHolder.rotation = Quaternion.AngleAxis(angle,Vector3.forward);
+        gunHolder.rotation = Quaternion.AngleAxis(angle-65,Vector3.forward);
 
 
         if(Input.GetMouseButton(0) && fuel > 0)
