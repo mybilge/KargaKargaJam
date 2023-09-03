@@ -22,6 +22,11 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float fuelDecreasingAmount = 1f;
     [SerializeField] float fuelIncreasingAmount = 1f;
 
+    public bool isGameStopped = false;
+
+
+    AudioSource audioSource;
+
     public static WeaponController Instance;
 
     private void Awake() {
@@ -39,6 +44,7 @@ public class WeaponController : MonoBehaviour
     private void Start() {
         mainCam = Camera.main;
         fuel = maxFuel;
+        audioSource = AudioManager.Instance.aSource;
     }
     
     void Update()
@@ -63,6 +69,10 @@ public class WeaponController : MonoBehaviour
 
         if(engineIsOn)
         {
+            if(!audioSource.isPlaying && !isGameStopped)
+            {
+                audioSource.Play();
+            }
             if(!fireExtingSmoke.isPlaying)
             {
                 fireExtingSmoke.Play();
@@ -70,11 +80,18 @@ public class WeaponController : MonoBehaviour
             
         }
         else {
+            if(audioSource.isPlaying)
+            {
+                audioSource.Pause();
+            }
             if(fireExtingSmoke.isPlaying)
             {
                 fireExtingSmoke.Stop();
             }
         }
+
+
+        
 
     }
 

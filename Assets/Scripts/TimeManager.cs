@@ -49,6 +49,7 @@ public class TimeManager : MonoBehaviour
         }
 
         UIManager.Instance.ShowWinScreen();
+
     }
 
     public float Timer()

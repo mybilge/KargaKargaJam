@@ -6,17 +6,30 @@ public class AudioManager : MonoBehaviour
 {
 
     [SerializeField] private AudioClip backLoop;
-    [SerializeField] AudioClip deneme;
+    [SerializeField] AudioClip smokeSound;
     // Start is called before the first frame update
-    AudioSource aSource;
+    public AudioSource aSource;
+
+
+    public static AudioManager Instance;
     private void Awake() {
+
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else{
+            Destroy(this);
+        }
+
         aSource = GetComponent<AudioSource>();
-        //aSource.clip = backLoop;
-
-    }
-
-    void Update()
-    {
         
+
     }
+
+
+
+    
+
+    
 }

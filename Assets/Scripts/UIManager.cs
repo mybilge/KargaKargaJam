@@ -78,6 +78,8 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(true);
         isPaused = true;
         pauseBtn.gameObject.SetActive(false);
+        AudioManager.Instance.aSource.Stop();
+        WeaponController.Instance.isGameStopped = true;
     }
 
     public void Cont()
@@ -92,6 +94,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         isPaused = false;
         pauseBtn.gameObject.SetActive(true);
+        WeaponController.Instance.isGameStopped = false;
     }
 
 
@@ -116,13 +119,17 @@ public class UIManager : MonoBehaviour
                 t.Seconds, 
                 t.Milliseconds);
         gameWinTimerText.text = timerStr;
+        AudioManager.Instance.aSource.Stop();
+        WeaponController.Instance.isGameStopped = true;
 
     }
     public void ShowLoseScreen()
     {
+        AudioManager.Instance.aSource.Stop();
         isGameEnded = true;
         Time.timeScale = 0;
         gameLose.SetActive(true);
+        WeaponController.Instance.isGameStopped = true;
 
     }
 }

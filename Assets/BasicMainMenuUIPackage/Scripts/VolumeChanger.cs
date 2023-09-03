@@ -14,7 +14,7 @@ public class VolumeChanger : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Volume"))
         {
-            PlayerPrefs.SetFloat("Volume", 0f);
+            PlayerPrefs.SetFloat("Volume", -20f);
         }
         Load();
     }
