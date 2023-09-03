@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> menuList;
+
+    [SerializeField] AudioMixer audioMixer;
 
     private void Awake() {
 
@@ -17,7 +20,18 @@ public class MainMenuManager : MonoBehaviour
         else{
             OpenMenu(menuList[0]);
         }
+
+        if (!PlayerPrefs.HasKey("Volume"))
+        {
+            PlayerPrefs.SetFloat("Volume", 0f);
+        }
+
         
+        
+    }
+
+    private void Start() {
+        audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("Volume"));
     }
 
     public void OpenMenu(GameObject menu)

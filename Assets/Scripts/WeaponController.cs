@@ -13,6 +13,7 @@ public class WeaponController : MonoBehaviour
     
 
     [Header("Gun Settings")]
+    [SerializeField] ParticleSystem fireExtingSmoke;
     [SerializeField] float gunForce =50f;
     [SerializeField] float pushBackForce;
     [SerializeField] float maxFuel = 5f;
@@ -59,6 +60,22 @@ public class WeaponController : MonoBehaviour
             engineIsOn = false;
             canFuel = true;
         }
+
+        if(engineIsOn)
+        {
+            if(!fireExtingSmoke.isPlaying)
+            {
+                fireExtingSmoke.Play();
+            }
+            
+        }
+        else {
+            if(fireExtingSmoke.isPlaying)
+            {
+                fireExtingSmoke.Stop();
+            }
+        }
+
     }
 
     private void FixedUpdate() {
