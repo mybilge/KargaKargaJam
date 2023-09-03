@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5111815655025678064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: -1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1676603851977765921}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 500
+  speed: 300
   nextWaypointDistance: 1
   updatePathRepeatingTime: 0.1
   damageRepeatingTime: 1
